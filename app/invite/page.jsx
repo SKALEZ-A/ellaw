@@ -1,14 +1,14 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import shoe from "@/public/walle-shoe.png";
 import Script from 'next/script';
 import Link from "next/link";
 import { GoHome } from "react-icons/go";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { HiOutlineUserGroup } from "react-icons/hi";
+import shoe from "@/public/walle-shoe.png";
 
-const Page = () => {
+const InvitePage = () => {
   const [username, setUsername] = useState('');
   const [inviteData, setInviteData] = useState(null);
   const [inviteLink, setInviteLink] = useState('');
@@ -118,7 +118,7 @@ const Page = () => {
           </Link>
           <Link href="/task">
             <div className="cursor-pointer flex flex-col items-center">
-              <AiOutlineUnorderedList size={24} />
+            <AiOutlineUnorderedList size={24} />
               <span className="text-[10px]">Tasks</span>
             </div>
           </Link>
@@ -134,5 +134,5 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default InvitePage;
 

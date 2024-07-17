@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Welcome from "@/app/components/subpages/home";
 
 export default function Home() {
@@ -13,7 +12,7 @@ export default function Home() {
     // Capture the start parameter from the URL
     const searchParams = new URLSearchParams(window.location.search);
     const start = searchParams.get('start');
-    if (typeof start === 'string') {
+    if (start) {
       setInviterUsername(start);
     }
 
@@ -23,7 +22,6 @@ export default function Home() {
       registerUser(user, start);
     }
   }, [router]);
-
 
   const registerUser = async (user: any, inviterUsername: string | null) => {
     const response = await fetch('https://walledb.onrender.com/api/Cluster0/register', {
