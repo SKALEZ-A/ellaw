@@ -1,5 +1,6 @@
+"use client"
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Welcome from "@/app/components/subpages/home";
 
@@ -10,7 +11,8 @@ export default function Home() {
 
   useEffect(() => {
     // Capture the start parameter from the URL
-    const { start } = router.query;
+    const searchParams = new URLSearchParams(window.location.search);
+    const start = searchParams.get('start');
     if (typeof start === 'string') {
       setInviterUsername(start);
     }
@@ -18,9 +20,10 @@ export default function Home() {
     // Fetch the Telegram user data
     const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
     if (user) {
-      registerUser(user, start as string);
+      registerUser(user, start);
     }
-  }, [router.query]);
+  }, [router]);
+
 
   const registerUser = async (user: any, inviterUsername: string | null) => {
     const response = await fetch('https://walledb.onrender.com/api/Cluster0/register', {
