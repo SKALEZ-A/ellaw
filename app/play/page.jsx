@@ -82,7 +82,6 @@ const page = () => {
     setTiles(prevTiles => prevTiles.filter(tile => tile.id !== id));
     setScore(prevScore => prevScore + 1);
   };
-
   const endGame = async (finalScore) => {
     try {
       const response = await fetch('https://walledb.onrender.com/api/Cluster0/update-score', {
@@ -105,6 +104,7 @@ const page = () => {
       console.error("Failed to update user score:", error);
     }
   };
+  
 
   const resetGame = () => {
     setTiles([]);

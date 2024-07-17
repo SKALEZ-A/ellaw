@@ -23,14 +23,41 @@ const Welcome = () => {
   const handleTaskClick = () => {
     router.push('/subpages/task'); // Navigate to the task page
   };
-
-  useEffect(() => {
+//   useEffect(() => {
+//     const fetchUserData = async () => {
+//       try {
+//         console.log("Checking Telegram WebApp initialization...");
+//         const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
+//         console.log("User data fetched from Telegram:", user);
+//         if (user) {
+//           setUsername(user.username || "Anon");
+//           const response = await fetch(`https://walledb.onrender.com/api/Cluster0/user/${user.username}`);
+//           const data = await response.json();
+//           if (response.ok) {
+//             setScore(data.score);
+//           } else {
+//             console.error('Failed to fetch user data:', data.message);
+//           }
+//         } else {
+//           console.warn("No user data found in Telegram WebApp");
+//         }
+//       } catch (error) {
+//         console.error("Failed to fetch user data:", error);
+//       }
+//     };
+  
+//     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
+//       fetchUserData();
+//     } else {
+//       console.error("Telegram WebApp is not available");
+//     }
+//   }, []);
+  
+useEffect(() => {
     const fetchUserData = async () => {
       try {
-        console.log("Checking Telegram WebApp initialization...");
-        console.log(window.Telegram);
         const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
-        console.log("User data fetched from Telegram:", user);
+        console.log("Fetched Telegram user:", user);
         if (user) {
           setUsername(user.username || "Anon");
           const response = await fetch(`https://walledb.onrender.com/api/Cluster0/user/${user.username}`);
@@ -47,13 +74,14 @@ const Welcome = () => {
         console.error("Failed to fetch user data:", error);
       }
     };
-
+  
     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
       fetchUserData();
     } else {
       console.error("Telegram WebApp is not available");
     }
   }, []);
+  
 
   return (
     <>
