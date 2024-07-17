@@ -1,13 +1,50 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
-import Welcome from "@/app/components/subpages/home"
+import Welcome from "@/app/components/subpages/home";
 
 export default function Home() {
+  const [inviterUsername, setInviterUsername] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // Capture the start parameter from the URL
+    const { start } = router.query;
+    if (typeof start === 'string') {
+      setInviterUsername(start);
+    }
+
+    // Fetch the Telegram user data
+    const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
+    if (user) {
+      registerUser(user, start as string);
+    }
+  }, [router.query]);
+
+  const registerUser = async (user: any, inviterUsername: string | null) => {
+    const response = await fetch('https://walledb.onrender.com/api/Cluster0/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user.id,
+        username: user.username,
+        inviterUsername,
+      }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      console.log('User registered successfully:', data);
+    } else {
+      console.error('Failed to register user:', data.message);
+    }
+  };
+
   return (
-    <main
-      className="flex flex-col items-center justify-between"
-    >
-      
-      <Welcome/>
+    <main className="flex flex-col items-center justify-between">
+      <Welcome />
     </main>
   );
 }

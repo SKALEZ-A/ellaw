@@ -77,62 +77,62 @@ const Page = () => {
           <div
             onClick={copyToClipboard}
             className="mx-auto text-center bg-[#302604] text-white my-2 font-semibold text-md py-2 px-7 rounded-full hover:bg-black cursor-pointer"
-            >
-              Copy link
-            </div>
-          </div>
-          <p className="text-sm text-gray-200 font-semibold text-center mb-5">
-            Score 10% from buddies + 2.5% from their referrals. <br /> Get a play pass 🎫 for each friend.
-          </p>
-  
-          <div className="flex flex-col border border-[#302604] rounded-lg p-5 text-start w-[70vw] text-gray-200">
-            <p className="font-bold text-xl">{inviteData ? inviteData.length : 0} frens</p>
-            {inviteData && inviteData.map((invitedUser) => (
-              <div key={invitedUser._id} className="flex items-center justify-between w-full border-b border-[#302604] py-4">
-                <div className="flex items-center">
-                  <span className="flex mx-3 items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white">
-                    {invitedUser.username.charAt(0)}
-                  </span>
-                  <p>{invitedUser.username}</p>
-                </div>
-                <h2 className="text-end flex">{invitedUser.score} <Image src={shoe} className="w-8" alt="Diamond" /></h2>
-              </div>
-            ))}
-          </div>
-          <div
-            onClick={shareLink}
-            className="mx-auto text-center w-[60vw] bg-[#302604] text-white my-2 font-semibold text-md py-2 rounded-full hover:bg-black cursor-pointer"
           >
-            Share
+            Copy link
           </div>
         </div>
-  
-        {/* footer */}
-        <div className="bg-[#302604] text-white py-3 fixed bottom-0 left-0 w-full">
-          <div className="flex justify-around">
-            <Link href="/">
-              <div className="cursor-pointer flex flex-col items-center">
-                <GoHome size={24} />
-                <span className="text-[10px]">Home</span>
+        <p className="text-sm text-gray-200 font-semibold text-center mb-5">
+          Score 10% from buddies + 2.5% from their referrals. <br /> Get a play pass 🎫 for each friend.
+        </p>
+
+        <div className="flex flex-col border border-[#302604] rounded-lg p-5 text-start w-[70vw] text-gray-200">
+          <p className="font-bold text-xl">{inviteData ? inviteData.length : 0} frens</p>
+          {inviteData && inviteData.map((invitedUser) => (
+            <div key={invitedUser._id} className="flex items-center justify-between w-full border-b border-[#302604] py-4">
+              <div className="flex items-center">
+                <span className="flex mx-3 items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white">
+                  {invitedUser.username.charAt(0)}
+                </span>
+                <p>{invitedUser.username}</p>
               </div>
-            </Link>
-            <Link href="/task">
-              <div className="cursor-pointer flex flex-col items-center">
-                <AiOutlineUnorderedList size={24} />
-                <span className="text-[10px]">Tasks</span>
-              </div>
-            </Link>
-            <Link href="/invite">
-              <div className="cursor-pointer flex flex-col items-center">
-                <HiOutlineUserGroup size={24} />
-                <span className="text-[10px]">Frens</span>
-              </div>
-            </Link>
-          </div>
+              <h2 className="text-end flex">{invitedUser.score} <Image src={shoe} className="w-8" alt="Diamond" /></h2>
+            </div>
+          ))}
+        </div>
+        <div
+          onClick={shareLink}
+          className="mx-auto text-center w-[60vw] bg-[#302604] text-white my-2 font-semibold text-md py-2 rounded-full hover:bg-black cursor-pointer"
+        >
+          Share
         </div>
       </div>
-    );
-  };
-  
-  export default Page;
-  
+
+      {/* footer */}
+      <div className="bg-[#302604] text-white py-3 fixed bottom-0 left-0 w-full">
+        <div className="flex justify-around">
+          <Link href="/">
+            <div className="cursor-pointer flex flex-col items-center">
+              <GoHome size={24} />
+              <span className="text-[10px]">Home</span>
+            </div>
+          </Link>
+          <Link href="/task">
+            <div className="cursor-pointer flex flex-col items-center">
+              <AiOutlineUnorderedList size={24} />
+              <span className="text-[10px]">Tasks</span>
+            </div>
+          </Link>
+          <Link href="/invite">
+            <div className="cursor-pointer flex flex-col items-center">
+              <HiOutlineUserGroup size={24} />
+              <span className="text-[10px]">Frens</span>
+            </div>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Page;
+
