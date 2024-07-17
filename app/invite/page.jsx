@@ -4,11 +4,11 @@ import Image from "next/image";
 import shoe from "@/public/walle-shoe.png";
 import Script from 'next/script';
 import Link from "next/link";
-import { AiFillHome, AiOutlineUnorderedList } from "react-icons/ai";
 import { GoHome } from "react-icons/go";
+import { AiOutlineUnorderedList } from "react-icons/ai";
 import { HiOutlineUserGroup } from "react-icons/hi";
 
-const page = () => {
+const Page = () => {
   const [username, setUsername] = useState('skalezDgreat');
   const [inviteData, setInviteData] = useState(null);
   const inviteLink = `https://t.me/walle_farm_bot/WallE_Farm_Bot?start=${username}`;
@@ -23,7 +23,7 @@ const page = () => {
     // Fetch invite data from the API
     const fetchInviteData = async () => {
       try {
-        const response = await fetch(`https://walledb.onrender.com/api/Cluster0/user${username}`);
+        const response = await fetch(`https://walledb.onrender.com/api/Cluster0/user/${username}`);
         const data = await response.json();
         if (response.ok) {
           setInviteData(data);
@@ -79,8 +79,7 @@ const page = () => {
           </div>
         </div>
         <p className="text-sm text-gray-200 font-semibold text-center mb-5">
-          Score 10% from buddies + 2.5% from their referrals. <br /> Get a play
-          pass 🎫 for each friend.
+          Score 10% from buddies + 2.5% from their referrals. <br /> Get a play pass 🎫 for each friend.
         </p>
 
         <div className="flex flex-col border border-[#302604] rounded-lg p-5 text-start w-[70vw] text-gray-200">
@@ -88,7 +87,7 @@ const page = () => {
           {inviteData && inviteData.invitedUsers.map((invitedUser) => (
             <div key={invitedUser.userId} className="flex items-center justify-between w-full border-b border-[#302604] py-4">
               <div className="flex items-center">
-                <span className="flex mx-3 items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white">
+              <span className="flex mx-3 items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white">
                   {invitedUser.username.charAt(0)}
                 </span>
                 <p>{invitedUser.username}</p>
@@ -133,4 +132,6 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
+
+               
