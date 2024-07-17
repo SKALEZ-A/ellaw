@@ -5,7 +5,7 @@ import Script from 'next/script';
 import Link from 'next/link';
 import StarsCanvas from '../components/subpages/StarBackground';
 
-const page = () => {
+const Page = () => {
   const [tiles, setTiles] = useState([]);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(10); // 10 seconds timer
@@ -16,6 +16,7 @@ const page = () => {
 
   useEffect(() => {
     const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
+    console.log("Telegram user:", user);
     if (user) {
       setUsername(user.username || 'badboy');
     }
@@ -82,7 +83,9 @@ const page = () => {
     setTiles(prevTiles => prevTiles.filter(tile => tile.id !== id));
     setScore(prevScore => prevScore + 1);
   };
+
   const endGame = async (finalScore) => {
+    console.log("End game, final score:", finalScore);
     try {
       const response = await fetch('https://walledb.onrender.com/api/Cluster0/update-score', {
         method: 'PUT',
@@ -104,7 +107,6 @@ const page = () => {
       console.error("Failed to update user score:", error);
     }
   };
-  
 
   const resetGame = () => {
     setTiles([]);
@@ -140,7 +142,7 @@ const page = () => {
         </div>
         {gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75">
-            <div className="bg-black rounded-md border border-[#1F7DF1] p-4  shadow-lg text-center">
+            <div className="bg-black rounded-md border border-[#1F7DF1] p-4 shadow-lg text-center">
               <h2 className="text-2xl mb-4">Game Over!</h2>
               <p className="mb-4">Your score is {score}</p>
               <button
@@ -167,5 +169,4 @@ const page = () => {
   );
 };
 
-export default page;
-
+export default Page;

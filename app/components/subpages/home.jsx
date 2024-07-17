@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 import Script from 'next/script';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AiFillHome, AiOutlineUnorderedList } from 'react-icons/ai';
 import { GoHome } from "react-icons/go";
+import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { HiOutlineUserGroup } from "react-icons/hi";
 import Particle from "@/app/components/subpages/Particles";
 import Navbar from "@/app/components/subpages/navbar";
@@ -13,51 +13,21 @@ import StarsCanvas from './StarBackground';
 
 const Welcome = () => {
   const [score, setScore] = useState(0);
-  const [username, setUsername] = useState("badboy");
+  const [username, setUsername] = useState("");
   const router = useRouter();
 
   const handlePlayClick = () => {
-    router.push('/play'); // Navigate to the play page
+    router.push('/play');
   };
 
   const handleTaskClick = () => {
-    router.push('/subpages/task'); // Navigate to the task page
+    router.push('/subpages/task');
   };
-//   useEffect(() => {
-//     const fetchUserData = async () => {
-//       try {
-//         console.log("Checking Telegram WebApp initialization...");
-//         const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
-//         console.log("User data fetched from Telegram:", user);
-//         if (user) {
-//           setUsername(user.username || "Anon");
-//           const response = await fetch(`https://walledb.onrender.com/api/Cluster0/user/${user.username}`);
-//           const data = await response.json();
-//           if (response.ok) {
-//             setScore(data.score);
-//           } else {
-//             console.error('Failed to fetch user data:', data.message);
-//           }
-//         } else {
-//           console.warn("No user data found in Telegram WebApp");
-//         }
-//       } catch (error) {
-//         console.error("Failed to fetch user data:", error);
-//       }
-//     };
-  
-//     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
-//       fetchUserData();
-//     } else {
-//       console.error("Telegram WebApp is not available");
-//     }
-//   }, []);
-  
-useEffect(() => {
+
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
-        console.log("Fetched Telegram user:", user);
         if (user) {
           setUsername(user.username || "Anon");
           const response = await fetch(`https://walledb.onrender.com/api/Cluster0/user/${user.username}`);
@@ -74,14 +44,13 @@ useEffect(() => {
         console.error("Failed to fetch user data:", error);
       }
     };
-  
+
     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
       fetchUserData();
     } else {
       console.error("Telegram WebApp is not available");
     }
   }, []);
-  
 
   return (
     <>
@@ -98,7 +67,7 @@ useEffect(() => {
           </div>
           <div className="flex justify-center items-start mt-4">
             <Image src="/walle-shoe.png" alt="Logo" width={30} height={30} className="rounded-full" />
-            <div className='text-center my-auto text-white font-bold text-xl '>{score}</div>
+            <div className='text-center my-auto text-white font-bold text-xl'>{score}</div>
           </div>
 
           <div className='bg w-[90vw] rounded-md border-[#302604] border-2 py-5 mt-[80px]'>
