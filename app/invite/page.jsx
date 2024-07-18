@@ -17,7 +17,7 @@ const InvitePage = () => {
     const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
     if (user) {
       setUsername(user.username || 'Anon');
-      setInviteLink(`https://t.me/walle_farm_bot/WallE_Farm_Bot?start=${user.username}`);
+      setInviteLink(`https://t.me/YOUR_BOT_NAME?start=${user.username}`);
     }
 
     const fetchInviteData = async () => {
@@ -133,4 +133,3 @@ const InvitePage = () => {
 };
 
 export default InvitePage;
-
