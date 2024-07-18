@@ -10,18 +10,16 @@ import shoe from "@/public/walle-shoe.png";
 
 const InvitePage = () => {
   const [username, setUsername] = useState('');
-  const [inviteData, setInviteData] = useState(null);
+  const [inviteData, setInviteData] = useState([]);
   const [inviteLink, setInviteLink] = useState('');
 
   useEffect(() => {
-    // Fetch the Telegram user data and set the username
     const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
     if (user) {
       setUsername(user.username || 'Anon');
       setInviteLink(`https://t.me/walle_farm_bot/WallE_Farm_Bot?start=${user.username}`);
     }
 
-    // Fetch invite data from the API
     const fetchInviteData = async () => {
       try {
         const response = await fetch(`https://walledb.onrender.com/api/Cluster0/invites/${user.username}`);
@@ -72,7 +70,7 @@ const InvitePage = () => {
         <div className="rounded-xl flex flex-col border border-[#302604] mb-5 gap-4 items-center justify-center p-5">
           <div className="flex flex-row">
             <Image src={shoe} className="w-8" alt="Diamond" />
-            <h1 className="flex text-gray-200 font-bold gap-2 text-xl">{inviteData ? inviteData.referralBalance : 0}</h1>
+            <h1 className="flex text-gray-200 font-bold gap-2 text-xl">{inviteData.length}</h1>
           </div>
           <div
             onClick={copyToClipboard}
@@ -86,8 +84,8 @@ const InvitePage = () => {
         </p>
 
         <div className="flex flex-col border border-[#302604] rounded-lg p-5 text-start w-[70vw] text-gray-200">
-          <p className="font-bold text-xl">{inviteData ? inviteData.length : 0} frens</p>
-          {inviteData && inviteData.map((invitedUser) => (
+          <p className="font-bold text-xl">{inviteData.length} frens</p>
+          {inviteData.map((invitedUser) => (
             <div key={invitedUser._id} className="flex items-center justify-between w-full border-b border-[#302604] py-4">
               <div className="flex items-center">
                 <span className="flex mx-3 items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white">
@@ -118,7 +116,7 @@ const InvitePage = () => {
           </Link>
           <Link href="/task">
             <div className="cursor-pointer flex flex-col items-center">
-            <AiOutlineUnorderedList size={24} />
+              <AiOutlineUnorderedList size={24} />
               <span className="text-[10px]">Tasks</span>
             </div>
           </Link>
