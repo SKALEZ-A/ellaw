@@ -9,14 +9,12 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    // Capture the start parameter from the URL
     const searchParams = new URLSearchParams(window.location.search);
     const start = searchParams.get('start');
     if (start) {
       setInviterUsername(start);
     }
 
-    // Fetch the Telegram user data
     const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
     if (user) {
       registerUser(user, start);
